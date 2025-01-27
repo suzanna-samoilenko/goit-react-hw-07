@@ -1,0 +1,25 @@
+.searchBox {
+  color: #0f2f52;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputSearchBox {
+  outline: none;
+  width: 350px;
+  padding: 10px;
+  border: 1px solid #0f2f52;
+  border-radius: 4px;
+  color: #0f2f52;
+  font-size: 16px;
+}
+
+.inputSearchBox:hover,
+.inputSearchBox:focus,
+.inputSearchBox:active {
+  border: 1px solid #184c85;
+  transition: 0.7s;
+}
