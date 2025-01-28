@@ -1,13 +1,13 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import styles from "./ContactForm.module.css";
 import * as Yup from "yup";
-import { nanoid } from "nanoid";
 import { useDispatch, useSelector } from "react-redux";
-import { addContact } from "../../redux/contactsSlice";
+import { addContact } from "../../redux/contactsOps";
 
 const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector((state) => state.contacts.items);
+  console.log("Contacts from Redux state:", contacts);
 
   const handleSubmit = (values, { resetForm }) => {
     const isDuplicate = contacts.some(
@@ -19,8 +19,7 @@ const ContactForm = () => {
       return;
     }
 
-    const newContact = { id: nanoid(), ...values };
-    dispatch(addContact(newContact));
+    dispatch(addContact(values));
     resetForm();
   };
   const registerSchema = Yup.object().shape({
@@ -30,7 +29,10 @@ const ContactForm = () => {
       .required("Required"),
 
     number: Yup.string()
-      .matches(/^\d{3}-\d{2,3}-\d{2,4}$/, "Invalid phone number format")
+      .matches(
+        /^\+?\d{1,4}[-.\s]?\(?\d{1,3}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}$/,
+        "Invalid phone number format"
+      )
       .required("Required"),
   });
 
