@@ -7,7 +7,6 @@ import { addContact } from "../../redux/contactsOps";
 const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector((state) => state.contacts.items);
-  console.log("Contacts from Redux state:", contacts);
 
   const handleSubmit = (values, { resetForm }) => {
     const isDuplicate = contacts.some(
